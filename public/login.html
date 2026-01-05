@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font Awesome (optional, can remove if not needed) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="login-body">
+
+  <div class="login-wrapper">
+    <div class="login-card">
+
+      <h2>Login</h2>
+      <p class="subtitle">Enter your credentials</p>
+
+      <form onsubmit="login(); return false;">
+        <h3 class="credentials">Email</h3>
+        <input
+          id="email"
+          type="email"
+          placeholder="Email address"
+          required
+        />
+        <h3 class="credentials">Password</h3>
+        <input
+          id="pass"
+          type="password"
+          placeholder="Password"
+          required
+        />
+
+        <a href="#" class="forgot">Forget password?</a>
+
+        <button type="submit">LOGIN</button>
+        <p class="signup"> Not a member? <a href="signup.html">Sign up now</a> </p>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

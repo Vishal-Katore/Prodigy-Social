@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .profile-card {
+      text-align: center;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .username {
+      color: gray;
+      margin-top: 5px;
+    }
+
+    .profile-stats {
+      margin-top: 10px;
+    }
+
+    .more-options {
+      margin-top: 20px;
+    }
+
+    .option {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+
+    .option:hover {
+      background: #f5f5f5;
+    }
+
+    .danger {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">Prodigy Social</span>
+  <div>
+    <a href="feed.html">Feed</a>
+    <a href="#" onclick="showNotifs()">🔔 <span id="nt" class="badge">0</span></a>
+    <button onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="feed">
+
+  <!-- PROFILE INFO -->
+  <div id="profile" class="card profile-card">
+
+    <!-- ✅ AVATAR -->
+    <img id="p-avatar" src="/media/default.png" class="profile-avatar">
+
+    <!-- ✅ NAME -->
+    <h2 id="p-name">Loading...</h2>
+
+    <!-- ✅ USERNAME -->
+    <p id="p-username" class="username"></p>
+
+    <!-- ✅ EMAIL -->
+    <p id="p-email"></p>
+
+    <!-- ✅ FOLLOW STATS -->
+    <div class="profile-stats">
+      <span>Followers: <b id="p-followers">0</b></span> |
+      <span>Following: <b id="p-following">0</b></span>
+    </div>
+  </div>
+
+  <!-- ✅ EXTRA MORE FEATURES -->
+  <div class="card more-options">
+    <div class="option">👤 Edit Profile</div>
+    <div class="option">🔐 Login & Security</div>
+    <div class="option">🔔 Notification Settings</div>
+    <div class="option">🌙 Dark Mode</div>
+    <div class="option">❓ Help & Support</div>
+    <div class="option danger" onclick="logout()">🚪 Logout</div>
+  </div>
+
+  <!-- NOTIFICATIONS -->
+  <div id="notifs" style="display:none"></div>
+
+</div>
+
+<script src="js/app.js"></script>
+
+<script>
+/* =========================
+   LOAD PROFILE DATA
+========================= */
+(async function loadProfilePage() {
+  const user = await json("/api/users/me", null, "GET");
+
+  document.getElementById("p-name").innerText = user.name;
+  document.getElementById("p-email").innerText = user.email;
+  document.getElementById("p-username").innerText =
+    user.username ? "@" + user.username : "";
+
+  document.getElementById("p-followers").innerText = user.followers.length;
+  document.getElementById("p-following").innerText = user.following.length;
+
+  document.getElementById("p-avatar").src =
+    user.avatar ? `/media/${user.avatar}` : "/media/default.png";
+})();
+</script>
+
+</body>
+</html>
